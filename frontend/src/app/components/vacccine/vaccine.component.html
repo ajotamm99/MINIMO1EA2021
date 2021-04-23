@@ -1,0 +1,71 @@
+<div class="row">
+
+  <!-- FORM -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body p-4">
+
+        <!-- FORM -->
+        <form #vaccineForm="ngForm" (ngSubmit)="addVaccine(vaccineForm)">
+          <!-- THE Id's Vaccine -->
+          <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="vaccineService.selectedVaccine._id">
+
+          <div class="form-group">
+            <input type="text" name="name" #name="ngModel" [(ngModel)]="vaccineService.selectedVaccine.name"
+              placeholder="Enter the name of the vaccine" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <div class="input-field col-s12">
+              <input type="text" name="description" #name="ngModel" [(ngModel)]="vaccineService.selectedVaccine.description"
+                placeholder="Enter a description" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input type="text" name="tecn" #name="ngModel" [(ngModel)]="vaccineService.selectedVaccine.tecn"
+              placeholder="Enter the technology used" class="form-control">
+          </div>
+
+          <div class="form-group">
+            <div class="input-field col-s12">
+              <input type="date" name="date" #name="ngModel" [(ngModel)]="vaccineService.selectedVaccine.date"
+                placeholder="Enter the date of release" class="form-control">
+            </div>
+          </div>
+
+          <button class="btn btn-primary mr-2" (click)="resetForm(vaccineForm)">Clean</button>
+          <button class="btn btn-secondary">Save</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- TABLE -->
+<div class="col-md-8">
+  <table class="table table-striped">
+    <thead>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Tecnology</th>
+      <th>Date</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vaccine of vaccineService.vaccines">
+        <td>{{ vaccine.name }}</td>
+        <td>{{ vaccine.description }}</td>
+        <td>{{ vaccine.tecn }}</td>
+        <td>{{ vaccine.date }}</td>
+        <td>
+          <a (click)="editVaccine(vaccine)" class="btn btn-secondary btn-sm">
+            <i class="material-icons">edit</i>
+          </a>
+          <a (click)="deleteVaccine(vaccine._id, vaccineForm)" class="btn btn-danger btn-sm">
+            <i class="material-icons">delete</i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
